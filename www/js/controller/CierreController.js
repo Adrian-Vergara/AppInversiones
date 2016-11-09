@@ -7,7 +7,7 @@
     angular.module('starter')
         .controller('CierreController', CierreController);
 
-    function CierreController($ionicPopup, $scope){
+    function CierreController($ionicPopup, $scope, LoginService, $state){
         $scope.Inversion = {'TotalPlaza': 0, 'TotalFactura': 0, 'TotalInversiones': 0};
         $scope.Gastos = {};
         $scope.Ventas = {'TotalEfectivo': 0, 'TotalBancos': 0, 'TotalVentas': 0};
@@ -64,11 +64,35 @@
             _showAlert(titulo, contenido);
         };
 
+        __init();
+
+        function __init() {
+            if(Inversion._getToken() != undefined){
+                $state.go('login', {});
+            }
+            else{
+
+            }
+        }
+
         function _showAlert(titulo, contenido){
             var alertPopup = $ionicPopup.alert({
                 title: titulo,
                 template: contenido
             });
         };
+
+        /*function GetUser(){
+            var promiseGet = LoginService.GetUser();
+            promiseGet.then(
+                function (data) {
+                    var respuesta = data.data;
+                    console.log(respuesta);
+                },
+                function (err) {
+                    console.log(JSON.stringify(err));
+                }
+            )
+        }*/
     };
 })();

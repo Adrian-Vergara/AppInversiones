@@ -9,6 +9,7 @@
 
     function BarController($scope, $state) {
         $scope.CerrarSesion = function () {
+            localStorage.clear();
             $state.go('login', {})
         }
     }
