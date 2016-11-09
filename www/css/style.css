@@ -1,0 +1,54 @@
+i.distancia{
+    margin-right: 10px;
+    font-size: 22px;
+}
+
+span.fuente{
+    font-size: 15px;
+    color: #666;
+}
+
+h2.titulo{
+    font-size: 16px;
+    font-weight: bold;
+    color: #666;
+}
+
+.logo{
+    width: 150px;
+}
+
+.imgVenta{
+    width: 110%;
+    height: 200px;
+}
+
+.tabs{
+    background-color: #00695c;
+}
+
+.tab-item{
+    color: #fff !important;
+}
+
+.bar-menu
+{
+    display: flex;
+    transform: translate3d(0,0,0);
+    -moz-user-select: none;
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 9;
+    box-zizing: border-box;
+    padding: 5px;
+    width: 100%;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    /*background-color: #0277bd !important;*/
+    border-style: none;
+    border-bottom: none;
+    height: 50px;
+    color: #fff;
+    background-color: #00695c;
+    border-color: #e42112;
+}

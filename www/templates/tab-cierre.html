@@ -1,0 +1,72 @@
+<ion-view view-title="Registro de Cierre" style="color: #fff;">
+    <ion-content class="padding">
+        <div class="list card">
+            <div class="item">
+                <h2 class="titulo" style="color: #46b8da;">Inversiones</h2>
+            </div>
+            <div class="item item-body">
+                <label class="item item-input">
+                    <i class="icon ion-bag distancia"></i>
+                    <span class="input-label fuente">Total Plazas</span>
+                    <input type="number" autofocus ng-model="Inversion.TotalPlaza" ng-change="CalcularTotalInversiones()">
+                </label>
+                <label class="item item-input">
+                    <i class="icon ion-clipboard distancia"></i>
+                    <span class="input-label fuente">Total Facturas</span>
+                    <input type="number" ng-model="Inversion.TotalFactura" ng-change="CalcularTotalInversiones()">
+                </label>
+                <label class="item item-input">
+                    <i class="icon ion-compose distancia"></i>
+                    <span class="input-label fuente">Total Inversiones</span>
+                    <label>{{Inversion.TotalInversiones}}</label>
+                </label>
+                <br>
+                <button class="button button-positive" ng-click="RegistrarInversion()" style="background-color: #00695c; color: #fff;">
+                    Registrar
+                </button>
+            </div>
+        </div>
+        <div class="list card">
+            <div class="item">
+                <h2 class="titulo" style="color: #d9534f;">Gastos</h2>
+            </div>
+            <div class="item item-body">
+                <label class="item item-input">
+                    <i class="icon ion-arrow-graph-down-left distancia"></i>
+                    <span class="input-label fuente">Total Gastos</span>
+                    <input type="number" ng-model="Gastos.TotalGastos">
+                </label>
+                <br>
+                <button class="button button-positive" ng-click="RegistrarGastos()" style="background-color: #00695c; color: #fff;">
+                    Registrar
+                </button>
+            </div>
+        </div>
+        <div class="list card">
+            <div class="item">
+                <h2 class="titulo" style="color: #5cb85c;">Ventas</h2>
+            </div>
+            <div class="item item-body">
+                <label class="item item-input">
+                    <i class="icon ion-cash distancia"></i>
+                    <span class="input-label fuente">Total Efectivo</span>
+                    <input type="number" ng-model="Ventas.TotalEfectivo" ng-change="CalcularTotalVentas()">
+                </label>
+                <label class="item item-input">
+                    <i class="icon ion-card distancia"></i>
+                    <span class="input-label fuente">Total Bancos</span>
+                    <input type="number" ng-model="Ventas.TotalBancos" ng-change="CalcularTotalVentas()">
+                </label>
+                <label class="item item-input">
+                    <i class="icon ion-arrow-graph-up-right distancia"></i>
+                    <span class="input-label fuente">Total Ventas</span>
+                    <label>{{Ventas.TotalVentas}}</label>
+                </label>
+                <br>
+                <button class="button button-positive" ng-click="RegistrarVentas()" style="background-color: #00695c; color: #fff;">
+                    Registrar
+                </button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
