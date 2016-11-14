@@ -24,7 +24,7 @@
         };
 
         $scope.colors= [{
-            backgroundColor:"#A2E0FC",
+            backgroundColor: "rgba(162, 224, 252, 0.50)",
             borderColor:"#00ADF9"
         }];
     }
