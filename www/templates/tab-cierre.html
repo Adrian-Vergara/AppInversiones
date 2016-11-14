@@ -1,5 +1,12 @@
 <ion-view view-title="Registro de Cierre" style="color: #fff;">
     <ion-content class="padding">
+        <div class="float-button" ng-click="RegistrarCierre()">
+	        <span class="height-fix">
+	  	        <a class="content">
+	    	        <i class="ion-plus"> </i>
+	   	        </a>
+	        </span>
+        </div>
         <div class="list card">
             <div class="item">
                 <h2 class="titulo" style="color: #46b8da;">Inversiones</h2>
@@ -8,22 +15,19 @@
                 <label class="item item-input">
                     <i class="icon ion-bag distancia"></i>
                     <span class="input-label fuente">Total Plazas</span>
-                    <input type="number" autofocus ng-model="Inversion.TotalPlaza" ng-change="CalcularTotalInversiones()">
+                    <input type="number" autofocus ng-model="Cierre.Costos"
+                           ng-change="CalcularTotalInversiones()">
                 </label>
                 <label class="item item-input">
                     <i class="icon ion-clipboard distancia"></i>
                     <span class="input-label fuente">Total Facturas</span>
-                    <input type="number" ng-model="Inversion.TotalFactura" ng-change="CalcularTotalInversiones()">
+                    <input type="number" ng-model="Cierre.Facturas" ng-change="CalcularTotalInversiones()">
                 </label>
                 <label class="item item-input">
                     <i class="icon ion-compose distancia"></i>
                     <span class="input-label fuente">Total Inversiones</span>
-                    <label>{{Inversion.TotalInversiones}}</label>
+                    <label>{{TotalInversiones}}</label>
                 </label>
-                <br>
-                <button class="button button-positive" ng-click="RegistrarInversion()" style="background-color: #00695c; color: #fff;">
-                    Registrar
-                </button>
             </div>
         </div>
         <div class="list card">
@@ -34,12 +38,8 @@
                 <label class="item item-input">
                     <i class="icon ion-arrow-graph-down-left distancia"></i>
                     <span class="input-label fuente">Total Gastos</span>
-                    <input type="number" ng-model="Gastos.TotalGastos">
+                    <input type="number" ng-model="Cierre.Gastos">
                 </label>
-                <br>
-                <button class="button button-positive" ng-click="RegistrarGastos()" style="background-color: #00695c; color: #fff;">
-                    Registrar
-                </button>
             </div>
         </div>
         <div class="list card">
@@ -50,22 +50,18 @@
                 <label class="item item-input">
                     <i class="icon ion-cash distancia"></i>
                     <span class="input-label fuente">Total Efectivo</span>
-                    <input type="number" ng-model="Ventas.TotalEfectivo" ng-change="CalcularTotalVentas()">
+                    <input type="number" ng-model="Cierre.Efectivo" ng-change="CalcularTotalVentas()">
                 </label>
                 <label class="item item-input">
                     <i class="icon ion-card distancia"></i>
                     <span class="input-label fuente">Total Bancos</span>
-                    <input type="number" ng-model="Ventas.TotalBancos" ng-change="CalcularTotalVentas()">
+                    <input type="number" ng-model="Cierre.Bancos" ng-change="CalcularTotalVentas()">
                 </label>
                 <label class="item item-input">
                     <i class="icon ion-arrow-graph-up-right distancia"></i>
                     <span class="input-label fuente">Total Ventas</span>
-                    <label>{{Ventas.TotalVentas}}</label>
+                    <label>{{TotalVentas}}</label>
                 </label>
-                <br>
-                <button class="button button-positive" ng-click="RegistrarVentas()" style="background-color: #00695c; color: #fff;">
-                    Registrar
-                </button>
             </div>
         </div>
     </ion-content>

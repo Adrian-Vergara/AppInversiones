@@ -1,98 +1,100 @@
 /**
  * Created by Ing. Adrian Vergara on 2/11/2016.
  */
-(function(){
+(function () {
     'use strict';
 
     angular.module('starter')
         .controller('CierreController', CierreController);
 
-    function CierreController($ionicPopup, $scope, LoginService, $state){
+    function CierreController($ionicPopup, $scope, CierreService, $state) {
         $scope.Inversion = {'TotalPlaza': 0, 'TotalFactura': 0, 'TotalInversiones': 0};
         $scope.Gastos = {};
         $scope.Ventas = {'TotalEfectivo': 0, 'TotalBancos': 0, 'TotalVentas': 0};
+        $scope.Cierre =
+        {
+            'Costos': 0,
+            'Facturas': 0,
+            'Gastos': 0,
+            'Efectivo': 0,
+            'Bancos': 0
+        };
+        $scope.TotalVentas = 0;
+        $scope.TotalInversiones = 0;
 
         $scope.CalcularTotalVentas = function () {
-            $scope.Ventas.TotalVentas = parseInt($scope.Ventas.TotalEfectivo) + parseInt($scope.Ventas.TotalBancos);
+            $scope.TotalVentas = parseInt($scope.Cierre.Efectivo) + parseInt($scope.Cierre.Bancos);
         };
 
         $scope.CalcularTotalInversiones = function () {
-            $scope.Inversion.TotalInversiones = parseInt($scope.Inversion.TotalPlaza) + parseInt($scope.Inversion.TotalFactura);
+            $scope.TotalInversiones = parseInt($scope.Cierre.Costos) + parseInt($scope.Cierre.Facturas);
         };
 
-        $scope.RegistrarInversion = function () {
-            var titulo;
-            var contenido;
-            if(($scope.Inversion.TotalPlaza != undefined && $scope.Inversion.TotalPlaza != null) || ($scope.Inversion.TotalFactura != undefined && $scope.Inversion.TotalFactura != null)){
-                titulo = "Enohorabuena!";
-                contenido = "Datos Almacenados Exitosamente";
+        $scope.RegistrarCierre = function () {
+            if($scope.Cierre.Costos >= 0 && $scope.Cierre.Facturas >= 0 && $scope.Cierre.Gastos && $scope.Cierre.Efectivo >= 0 && $scope.Cierre.Bancos >= 0){
+                RegistrarCierre();
             }
             else{
-                titulo = "Error!";
-                contenido = "Verifique que los campos no estén vacíos";
+                _showAlert('Error', 'Verifique que no hayan valaores menores que cero');
             }
-            _showAlert(titulo, contenido);
-            $scope.Inversion = {};
-        };
-
-        $scope.RegistrarGastos = function () {
-            var titulo;
-            var contenido;
-            if($scope.Gastos.TotalGastos != undefined && $scope.Gastos.TotalGastos != null){
-                titulo = "Enohorabuena!";
-                contenido = "Datos Almacenados Exitosamente";
-            }
-            else{
-                titulo = "Error!";
-                contenido = "Verifique que los campos no estén vacíos";
-            }
-            _showAlert(titulo, contenido);
-            $scope.Gastos = {};
-        };
-
-        $scope.RegistrarVentas = function () {
-            var titulo;
-            var contenido;
-            if(($scope.Ventas.TotalEfectivo != undefined && $scope.Ventas.TotalEfectivo != null && $scope.Ventas.TotalEfectivo != 0) || ($scope.Ventas.TotalBancos != undefined && $scope.Ventas.TotalBancos != null && $scope.Ventas.TotalBancos != 0)){
-                titulo = "Enohorabuena!";
-                contenido = "Datos Almacenados Exitosamente";
-            }
-            else{
-                titulo = "Error!";
-                contenido = "Verifique que los campos no estén vacíos";
-            }
-            _showAlert(titulo, contenido);
         };
 
         __init();
 
         function __init() {
-            if(Inversion._getToken() != undefined){
-                $state.go('login', {});
-            }
-            else{
-
-            }
+            GetUser();
         }
 
-        function _showAlert(titulo, contenido){
+        function _showAlert(titulo, contenido) {
             var alertPopup = $ionicPopup.alert({
                 title: titulo,
                 template: contenido
             });
         };
 
-        /*function GetUser(){
-            var promiseGet = LoginService.GetUser();
+        function GetUser() {
+            var promiseGet = CierreService.GetUser();
             promiseGet.then(
                 function (data) {
                     var respuesta = data.data;
-                    console.log(respuesta);
+                    Inversion._setNombreCompleto(respuesta.fullName);
+                    Inversion._setIdUsuario(respuesta.id);
                 },
                 function (err) {
                     console.log(JSON.stringify(err));
                 }
             )
-        }*/
+        };
+
+        function RegistrarCierre() {
+            var promisePost = CierreService.RegistrarCierre($scope.Cierre);
+            promisePost.then(
+                function (data) {
+                    var respuesta = data.data;
+                    var titulo;
+                    var contenido;
+                    console.log(respuesta);
+                    if(respuesta.errors.length == 0){
+                        titulo = "Enhorabuena!";
+                        $scope.Cierre =
+                        {
+                            'Costos': 0,
+                            'Facturas': 0,
+                            'Gastos': 0,
+                            'Efectivo': 0,
+                            'Bancos': 0
+                        };
+                    }
+                    else{
+                        titulo = "Error!";
+                    }
+                    contenido = respuesta.mensagge;
+                    _showAlert(titulo,contenido);
+                },
+                function (err) {
+                    console.log(JSON.stringify(err));
+                }
+            )
+        }
     };
 })();
