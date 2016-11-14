@@ -1,17 +1,23 @@
 <ion-nav-bar class="bar-menu" style="color: #fff;" ng-controller="BarController">
-  <ion-nav-back-button style="color: #fff;">
-  </ion-nav-back-button>
-  <ion-nav-buttons>
-    <a menu-close class="item-icon-right" ng-click="CerrarSesion()">
-      <i class="icon ion-power" style="color: #fff;"></i>
-    </a>
-  </ion-nav-buttons>
+    <ion-nav-back-button style="color: #fff;">
+    </ion-nav-back-button>
+    <ion-nav-buttons>
+        <a menu-close class="item-icon-right" ng-click="CerrarSesion()">
+            <i class="icon ion-power" style="color: #fff;"></i>
+        </a>
+    </ion-nav-buttons>
 </ion-nav-bar>
 <ion-tabs class="tabs-icon-top">
-  <ion-tab title="Registro de Cierre" icon-off="ion-clipboard" icon-on="ion-clipboard" href="#/tab/cierre" class="color-tab">
-    <ion-nav-view name="tab-cierre"></ion-nav-view>
-  </ion-tab>
-  <ion-tab title="Reportes" icon-off="ion-stats-bars" icon-on="ion-stats-bars" href="#/tab/reportes" class="color-tab">
-    <ion-nav-view name="tab-reportes"></ion-nav-view>
-  </ion-tab>
+    <ion-tab title="Registro de Cierre" icon-off="ion-clipboard" icon-on="ion-clipboard" href="#/tab/cierre"
+             class="color-tab">
+        <ion-nav-view name="tab-cierre"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="Reportes" icon-off="ion-stats-bars" icon-on="ion-stats-bars" href="#/tab/reportes"
+             class="color-tab">
+        <ion-nav-view name="tab-reportes"></ion-nav-view>
+    </ion-tab>
+    <ion-tab title="Contraseña" icon-off="ion-locked" icon-on="ion-locked" href="#/tab/password"
+             class="color-tab">
+        <ion-nav-view name="tab-password"></ion-nav-view>
+    </ion-tab>
 </ion-tabs>

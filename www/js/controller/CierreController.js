@@ -31,11 +31,11 @@
         };
 
         $scope.RegistrarCierre = function () {
-            if($scope.Cierre.Costos >= 0 && $scope.Cierre.Facturas >= 0 && $scope.Cierre.Gastos && $scope.Cierre.Efectivo >= 0 && $scope.Cierre.Bancos >= 0){
+            if($scope.Cierre.Costos > -1 && $scope.Cierre.Facturas > -1 && $scope.Cierre.Gastos > -1 && $scope.Cierre.Efectivo > -1 && $scope.Cierre.Bancos > -1){
                 RegistrarCierre();
             }
             else{
-                _showAlert('Error', 'Verifique que no hayan valaores menores que cero');
+                _showAlert('Error', 'Verifique que no hayan valores menores que cero');
             }
         };
 
