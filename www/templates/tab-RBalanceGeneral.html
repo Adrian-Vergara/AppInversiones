@@ -1,4 +1,4 @@
-<ion-view view-title="Balance General">
+<ion-view view-title="Balance General" ng-controller="ReporteBalanceGeneralController">
     <ion-content class="padding">
         <br>
         <div class="row">
@@ -24,7 +24,9 @@
                 <button class="button icon-left ion-search"></button>
             </div>
         </div>
-        <br>
-        <center><img src="img/BalanceGeneral.png" class="imgVenta"></center>
+        <canvas id="line" class="chart chart-line" chart-data="data"
+                chart-labels="labels" chart-series="series" chart-options="options"
+                chart-dataset-override="datasetOverride" chart-click="onClick" chart-colors="colors"
+        </canvas>
     </ion-content>
 </ion-view>

@@ -5,20 +5,13 @@
     'use strict';
     
     var app = angular.module('starter');
-    
+
     app.controller('ReportesController', ReportesController);
     
-    function ReportesController($scope, $rootScope, $state) {
-        $rootScope.Csesion = false;
+    function ReportesController($scope, $state) {
         __init();
 
         function __init() {
-            if(Inversion._getToken() != undefined){
-                $state.go('login', {});
-            }
-            else{
-
-            }
         }
     }
 })();

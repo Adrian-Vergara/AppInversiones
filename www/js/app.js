@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('starter', ['ionic'])
+  angular.module('starter', ['ionic','chart.js'])
 
       .run(function($ionicPlatform, $rootScope) {
           $rootScope.Csesion = true;
@@ -9,7 +9,6 @@
           if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             cordova.plugins.Keyboard.disableScroll(true);
-
           }
           if (window.StatusBar) {
             StatusBar.styleDefault();

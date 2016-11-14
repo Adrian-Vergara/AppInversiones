@@ -73,7 +73,6 @@
                     var respuesta = data.data;
                     var titulo;
                     var contenido;
-                    console.log(respuesta);
                     if(respuesta.errors.length == 0){
                         titulo = "Enhorabuena!";
                         $scope.Cierre =
