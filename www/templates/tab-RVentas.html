@@ -1,11 +1,10 @@
 <ion-view view-title="Reporte de Ventas">
     <ion-content class="padding">
-        <br>
         <div class="row">
             <div class="col col-30">
                 <label class="item item-input" style="border-top: 1px solid #ddd;">
                     <i class="icon ion-calendar distancia"></i>
-                    <span class="input-label">Fecha Inicio</span>
+                    <span class="input-label fuente">Fecha Inicio</span>
                     <input type="date">
                 </label>
             </div>
@@ -16,7 +15,7 @@
             <div class="col col-30">
                 <label class="item item-input" style="border-top: 1px solid #ddd;">
                     <i class="icon ion-calendar distancia"></i>
-                    <span class="input-label">Fecha Fin</span>
+                    <span class="input-label fuente">Fecha Fin</span>
                     <input type="date">
                 </label>
             </div>
@@ -25,9 +24,23 @@
             </div>
         </div>
 
+        <div class="card text-center">
+            <div class="item item-text-wrap" style="text-align:justify">
+                <h2 style="font-weight: bold; color: #5cb85c">Información General</h2>
+            </div>
+            <div class="row" ng-repeat="item in ventas">
+                <a class="itemList item-icon-left text-left" style="width: 100%;">
+                    <i class="icon ion-checkmark-circled" style="font-size: 18px; color: #666;"></i>
+                    <label style="color: #666; font-weight: bold;">{{item.mes}}</label>
+                    <label style="color: #5cb85c; font-weight: bold; margin-left: 25px; float: right;">${{item.total | number}}</label>
+                </a>
+            </div>
+        </div><br>
+
         <canvas id="line" class="chart chart-line" chart-data="data"
                 chart-labels="labels" chart-options="options"
                 chart-dataset-override="datasetOverride" chart-click="onClick" chart-colors="colors"
         </canvas>
+
     </ion-content>
 </ion-view>

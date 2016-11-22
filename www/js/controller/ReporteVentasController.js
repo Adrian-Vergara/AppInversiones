@@ -14,6 +14,16 @@
         function __init() {
         }
 
+        $scope.ventas =
+            [
+                {'mes': 'Enero', 'total': 1200000},
+                {'mes': 'Febrero', 'total': 2300000},
+                {'mes': 'Marzo', 'total': 1700000},
+                {'mes': 'Abril', 'total': 3060000},
+                {'mes': 'Mayo', 'total': 960000},
+                {'mes': 'Junio', 'total': 2750000}
+            ];
+
         $scope.labels = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"];
 
         $scope.data = [
@@ -24,8 +34,8 @@
         };
 
         $scope.colors= [{
-            backgroundColor: "rgba(206, 241, 240, 0.50)",
-            borderColor:"#46BFBD"
+            backgroundColor: "rgba(92, 184, 92, 0.40)",
+            borderColor:"#5cb85c"
         }];
     }
 })();

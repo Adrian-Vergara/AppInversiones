@@ -38,8 +38,7 @@
                     url: '/cierre',
                     views: {
                         'tab-cierre': {
-                            templateUrl: 'templates/tab-cierre.html',
-                            controller: 'CierreController'
+                            templateUrl: 'templates/tab-cierre.html'
                         }
                     }
                 })

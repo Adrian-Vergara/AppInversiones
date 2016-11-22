@@ -24,6 +24,18 @@
                 <button class="button icon-left ion-search"></button>
             </div>
         </div>
+        <div class="card text-center">
+            <div class="item item-text-wrap" style="text-align:justify">
+                <h2 style="font-weight: bold; color: #00ADF9">Información General</h2>
+            </div>
+            <div class="row" ng-repeat="item in inversiones">
+                <a class="itemList item-icon-left text-left" style="width: 100%;">
+                    <i class="icon ion-checkmark-circled" style="font-size: 18px; color: #666;"></i>
+                    <label style="color: #666; font-weight: bold;">{{item.mes}}</label>
+                    <label style="color: #00ADF9; font-weight: bold; margin-left: 25px; float: right;">${{item.total | number}}</label>
+                </a>
+            </div>
+        </div><br>
         <canvas id="line" class="chart chart-line" chart-data="data"
                 chart-labels="labels" chart-options="options"
                 chart-dataset-override="datasetOverride" chart-click="onClick" chart-colors="colors"

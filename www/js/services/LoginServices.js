@@ -32,13 +32,7 @@
 
             };
 
-            var GetUser = function () {
-                var req = $http.get(Inversion._getUrl() + 'api/accounts/user/' + Inversion._getUsername() + '?token=' + Inversion._getToken());
-                return req;
-            };
-
             authServiceFactory.login = _login;
-            authServiceFactory.GetUser = GetUser;
 
             return authServiceFactory;
         }

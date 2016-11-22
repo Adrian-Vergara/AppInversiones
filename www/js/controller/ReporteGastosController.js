@@ -36,6 +36,16 @@
             }
         };
 
+        $scope.gastos =
+            [
+                {'mes': 'Enero', 'total': 1200000},
+                {'mes': 'Febrero', 'total': 2300000},
+                {'mes': 'Marzo', 'total': 1700000},
+                {'mes': 'Abril', 'total': 3060000},
+                {'mes': 'Mayo', 'total': 960000},
+                {'mes': 'Junio', 'total': 2750000}
+            ];
+
         $scope.colors= [{
             backgroundColor: "rgba(244, 149, 146, 0.50)",
             borderColor:"#d9534f"
