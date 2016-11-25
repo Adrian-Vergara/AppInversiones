@@ -10,15 +10,6 @@
 
 
     function CierreService($http) {
-
-        this.GetUser = function () {
-            return $http({
-                method: 'GET',
-                url: Inversion._getUrl() + 'apiv1/accounts/user/' + Inversion._getUsername(),
-                headers: {'authorization': 'bearer ' + Inversion._getToken()}
-            });
-        };
-
         this.RegistrarCierre = function (cierre) {
             cierre.UserName = Inversion._getUsername();
             return $http({
@@ -27,7 +18,14 @@
                 headers: {'authorization': 'bearer ' + Inversion._getToken()},
                 data: cierre
             })
-        }
+        };
 
+        this.GetUser = function () {
+            return $http({
+                method: 'GET',
+                url: Inversion._getUrl() + 'apiv1/accounts/user/' + Inversion._getUsername(),
+                headers: {'authorization': 'bearer ' + Inversion._getToken()}
+            });
+        };
     }
 })();

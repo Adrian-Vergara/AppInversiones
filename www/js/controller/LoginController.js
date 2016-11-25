@@ -8,7 +8,7 @@
 
     app.controller('LoginController', LoginController);
 
-    function LoginController($ionicPopup, $scope, $state, LoginService) {
+    function LoginController($ionicPopup, $scope, $state, LoginService, CierreService) {
         $scope.credenciales = {};
         $scope.loading = false;
 
@@ -30,13 +30,28 @@
                 function (datos) {
                     Inversion._setToken(datos.access_token);
                     Inversion._setUsername($scope.credenciales.username);
-                    $state.go('tab.cierre');
+                    GetUser();
                 },
                 function (error) {
                     console.log(JSON.stringify(error));
                 }
             )
         }
+
+        function GetUser() {
+            var promiseGet = CierreService.GetUser();
+            promiseGet.then(
+                function (data) {
+                    var respuesta = data.data;
+                    Inversion._setNombreCompleto(respuesta.fullName);
+                    Inversion._setIdUsuario(respuesta.id);
+                    $state.go('app.cierre');
+                },
+                function (err) {
+                    console.log(JSON.stringify(err));
+                }
+            )
+        };
 
         function _showAlert(titulo, contenido) {
             var alertPopup = $ionicPopup.alert({

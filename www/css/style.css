@@ -24,7 +24,7 @@ h2.titulo{
 }
 
 .tabs{
-    background-color: #00695c;
+    background-color: #0277bd;
 }
 
 .tab-item{
@@ -49,13 +49,13 @@ h2.titulo{
     border-bottom: none;
     height: 50px;
     color: #fff;
-    background-color: #00695c;
+    background-color: #0277bd;
     border-color: #e42112;
 }
 
 .float-button {
 
-    background-color: #00695c;
+    background-color: #0277bd;
     color: white;
     border-radius: 50%;
     /*border-radius:15% 0 0 0;*/
@@ -63,9 +63,9 @@ h2.titulo{
     padding: 25px;
     font-size: 25px;
     position: fixed;
-    bottom: 30%; /* Adjust height */
-    right: 5%; /* Adjust position */
-    z-index: 1000;
+    bottom: 15px; /* Adjust height */
+    right: 10px; /* Adjust position */
+    z-index: 999;
 }
 
 .float-button .height_fix {
@@ -94,4 +94,79 @@ h2.titulo{
     padding: 6px;
     font-size: 16px;
     padding-left: 54px;
+}
+
+.colorItemMenu
+{
+    background-color: #455a64 !important;
+    color: #fff;
+}
+
+.colorIconosMenu
+{
+    color: #fff;
+}
+
+.ItemMenu{
+    position: relative;
+    z-index: 2;
+    display: block;
+    margin: -1px;
+    padding: 16px;
+    font-size: 15px;
+    padding-left: 54px;
+    text-decoration: none;
+}
+
+a.colorItemMenu:hover
+{
+    background-color: #78909c !important;
+    color: #fff;
+    cursor: pointer;
+}
+
+.sombra
+{
+    box-shadow: 0 -1px 5px 4px #666666;
+    background-color: #0277bd !important
+}
+
+.bar-menu
+{
+    display: flex;
+    transform: translate3d(0,0,0);
+    -moz-user-select: none;
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 9;
+    box-zizing: border-box;
+    padding: 5px;
+    width: 100%;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    /*background-color: #0277bd !important;*/
+    border-style: none;
+    border-bottom: none;
+    height: 50px;
+    color: #fff;
+    background-color: #0277bd;
+    border-color: #e42112;
+}
+
+.thumb
+{
+    border-radius: 0% 50% 50% 50%;
+    position: absolute;
+    border: none;
+    height: 0;
+    border-radius: 50%;
+    background-color: #26a69a;
+    transform-origin: 50% 50%;
+}
+
+.logo {
+    display: block;
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
 }

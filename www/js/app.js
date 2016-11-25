@@ -20,32 +20,39 @@
 
             $stateProvider
 
-                .state('tab', {
+                /*.state('tab', {
                     url: '/tab',
                     abstract: true,
                     templateUrl: 'templates/tabs.html'
+                })*/
+                .state('app', {
+                    url: '/app',
+                    abstract: true,
+                    templateUrl: 'templates/menu.html',
+                    controller: 'MenuController as menu'
                 })
-                .state('tab.password', {
+                .state('app.password', {
                     url: '/password',
                     views: {
-                        'tab-password': {
+                        'menuContent': {
                             templateUrl: 'templates/tab-password.html',
                             controller: 'PasswordController'
                         }
                     }
                 })
-                .state('tab.cierre', {
+                .state('app.cierre', {
                     url: '/cierre',
                     views: {
-                        'tab-cierre': {
-                            templateUrl: 'templates/tab-cierre.html'
+                        'menuContent': {
+                            templateUrl: 'templates/tab-cierre.html',
+                            controller: 'CierreController'
                         }
                     }
                 })
-                .state('tab.reportes', {
+                .state('app.reportes', {
                     url: '/reportes',
                     views: {
-                        'tab-reportes': {
+                        'menuContent': {
                             templateUrl: 'templates/tab-reportes.html',
                             controller: 'ReportesController'
                         }
@@ -56,44 +63,44 @@
                     templateUrl: 'templates/login.html',
                     controller: 'LoginController'
                 })
-                .state('tab.reporteVentas', {
+                .state('app.reporteVentas', {
                     url: '/reporteVentas',
                     views: {
-                        'tab-reportes': {
+                        'menuContent': {
                             templateUrl: 'templates/tab-RVentas.html',
                             controller: 'ReporteVentasController'
                         }
                     }
                 })
-                .state('tab.reporteGastos', {
+                .state('app.reporteGastos', {
                     url: '/reporteGastos',
                     views: {
-                        'tab-reportes': {
+                        'menuContent': {
                             templateUrl: 'templates/tab-RGastos.html',
                             controller: 'ReporteGastosController'
                         }
                     }
                 })
-                .state('tab.reporteInversiones', {
+                .state('app.reporteInversiones', {
                     url: '/reporteInversiones',
                     views: {
-                        'tab-reportes': {
+                        'menuContent': {
                             templateUrl: 'templates/tab-RInversiones.html',
                             controller: 'ReporteInversionesController'
                         }
                     }
                 })
-                .state('tab.BalanceGeneral', {
+                .state('app.BalanceGeneral', {
                     url: '/BalanceGeneral',
                     views: {
-                        'tab-reportes': {
+                        'menuContent': {
                             templateUrl: 'templates/tab-RBalanceGeneral.html',
                             controller: 'ReporteBalanceGeneralController'
                         }
                     }
                 });
 
-            $urlRouterProvider.otherwise('/login');
+            $urlRouterProvider.otherwise('/app/cierre');
 
         });
 })();

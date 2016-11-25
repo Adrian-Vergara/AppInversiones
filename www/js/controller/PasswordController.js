@@ -9,7 +9,6 @@
     app.controller('PasswordController',PasswordController);
 
     function PasswordController($scope, $ionicPopup) {
-        $scope.nombre = Inversion._getNombreCompleto();
         $scope.Password = {};
 
         $scope.CambiarPassword = function () {

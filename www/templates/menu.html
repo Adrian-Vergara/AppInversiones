@@ -1,0 +1,32 @@
+<ion-side-menus>
+    <ion-side-menu-content>
+        <ion-nav-bar align-title="center" class="bar-menu" style="font-weight: bold;">
+            <ion-nav-back-button style="color: #fff;">
+            </ion-nav-back-button>
+            <ion-nav-buttons side="left">
+                <button style="color: #fff;" class="button button-icon button-clear ion-navicon-round" menu-toggle="left">
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="left" style="background-color: #455a64 !important;">
+        <ion-content>
+            <img src="img/fondo.jpg" width="100%" style="height: 150px;;"/>
+            <div class="list">
+                <label menu-close class="ItemMenu item-icon-left colorItemMenu">
+                    <i class="icon ion-university"></i>
+                    {{menu.nombre_completo}}
+                </label>
+                <a menu-close class="ItemMenu item-icon-left colorItemMenu" ui-sref="{{item.sref}}" ng-repeat="item in menu.ItemMenu">
+                    <i class="icon {{item.icon}}"></i>
+                    {{item.item}}
+                </a>
+                <a menu-close ng-click="menu.cerrar_sesion()" class="ItemMenu item-icon-left colorItemMenu">
+                    <i class="icon ion-power"></i>
+                    Cerrar Sesión
+                </a>
+            </div>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

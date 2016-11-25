@@ -39,10 +39,13 @@
             }
         };
 
+        /*$scope.$on('$ionicView.loaded', function(){
+            __init();
+        });*/
+
         __init();
 
         function __init() {
-            GetUser();
         }
 
         function _showAlert(titulo, contenido) {
@@ -50,20 +53,6 @@
                 title: titulo,
                 template: contenido
             });
-        };
-
-        function GetUser() {
-            var promiseGet = CierreService.GetUser();
-            promiseGet.then(
-                function (data) {
-                    var respuesta = data.data;
-                    Inversion._setNombreCompleto(respuesta.fullName);
-                    Inversion._setIdUsuario(respuesta.id);
-                },
-                function (err) {
-                    console.log(JSON.stringify(err));
-                }
-            )
         };
 
         function RegistrarCierre() {
