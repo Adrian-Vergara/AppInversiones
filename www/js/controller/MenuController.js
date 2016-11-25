@@ -12,7 +12,8 @@
             [
                 {'item': 'Cambiar Contraseña', 'icon': 'ion-locked', 'sref': 'app.password'},
                 {'item': 'Registro de Cierre', 'icon': 'ion-clipboard', 'sref': 'app.cierre'},
-                {'item': 'Reportes', 'icon': 'ion-stats-bars', 'sref': 'app.reportes'}
+                {'item': 'Reportes', 'icon': 'ion-stats-bars', 'sref': 'app.reportes'},
+                {'item': 'Almacenes', 'icon': 'ion-ios-home', 'sref': 'app.almacen'}
             ];
 
         /*$ionicHistory.nextViewOptions({

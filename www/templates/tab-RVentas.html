@@ -9,6 +9,7 @@
                 </label>
             </div>
             <div class="col col-20">
+                <button class="button icon-left ion-android-print" ng-click="generatePDF()"></button>
             </div>
         </div>
         <div class="row">
@@ -36,6 +37,33 @@
                 </a>
             </div>
         </div><br>
+
+        <table class="dataTable row-border hover" datatable="ng" dt-options="dtOptions" id="ViewVentasPdf">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Foo</td>
+                <td>Bar</td>
+            </tr>
+            <tr>
+                <td>123</td>
+                <td>Someone</td>
+                <td>Youknow</td>
+            </tr>
+            <tr>
+                <td>987</td>
+                <td>Iamout</td>
+                <td>Ofinspiration</td>
+            </tr>
+            </tbody>
+        </table>
 
         <canvas id="line" class="chart chart-line" chart-data="data"
                 chart-labels="labels" chart-options="options"

@@ -1,10 +1,11 @@
 (function () {
     'use strict';
 
-    angular.module('starter', ['ionic', 'chart.js'])
+    angular.module('starter', ['ionic', 'chart.js', 'datatables'])
 
         .run(function ($ionicPlatform, $rootScope) {
-            $rootScope.Csesion = true;
+            $rootScope.AlmacenesSeleccionados = [];
+            $rootScope.almacenes = [];
             $ionicPlatform.ready(function () {
                 if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
                     cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -96,6 +97,15 @@
                         'menuContent': {
                             templateUrl: 'templates/tab-RBalanceGeneral.html',
                             controller: 'ReporteBalanceGeneralController'
+                        }
+                    }
+                })
+                .state('app.almacen', {
+                    url: '/Almacen',
+                    views: {
+                        'menuContent':{
+                            templateUrl: 'templates/almacenes.html',
+                            controller: 'AlmacenController'
                         }
                     }
                 });
