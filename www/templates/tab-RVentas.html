@@ -44,8 +44,17 @@
             <div class="row" ng-repeat="item in ventas">
                 <a class="itemList item-icon-left text-left" style="width: 100%;">
                     <i class="icon ion-checkmark-circled" style="font-size: 18px; color: #666;"></i>
-                    <label style="color: #666; font-weight: bold;">{{item.fecha | date: "MMM dd yyyy"}}</label>
-                    <label style="color: #5cb85c; font-weight: bold; margin-left: 25px; float: right;">${{item.venta | number}}</label>
+
+                    <label style="color: #666; font-size: 14px; float: left; font-weight: bold; text-transform: capitalize">Fecha</label>
+                    <label style="color: #666; font-size: 14px; float: right; font-weight: bold; text-transform: capitalize">{{item.fecha | date: "MMM dd yyyy"}}</label><br>
+                    <label style="color: #00ADF9; font-size: 14px; font-weight: bold;">Efectivo</label>
+                    <label style="color: #00ADF9; font-size: 14px; float: right; font-weight: bold;">${{item.efectivo | number}}</label><br>
+
+                    <label style="color: rgba(13, 71, 161, 1); font-size: 14px; font-weight: bold;">Bancos</label>
+                    <label style="color: rgba(13, 71, 161, 1); font-size: 14px; font-weight: bold; float: right;">${{item.bancos | number}}</label><br>
+
+                    <label style="color: #5cb85c; font-size: 14px; font-weight: bold;">Ventas</label>
+                    <label style="color: #5cb85c; font-size: 14px; float: right; font-weight: bold;">${{item.venta | number}}</label>
                 </a>
             </div>
         </div><br>
