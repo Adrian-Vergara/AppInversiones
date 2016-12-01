@@ -12,6 +12,8 @@
         $scope.credenciales = {};
         $scope.loading = false;
 
+        _redireccionar();
+
         $scope.login = function () {
             var titulo = "Error";
             var contenido;
@@ -50,12 +52,8 @@
                     Inversion._setIdUsuario(respuesta.id);
                     Inversion._setNombreRol(respuesta.roles[0]);
                     $rootScope.rol = Inversion._getNombreRol();
-                    if (Inversion._getNombreRol() == "inversionista"){
-                        $state.go('app.reportes');
-                    }
-                    else {
-                        $state.go('app.cierre');
-                    }
+                    _redireccionar();
+
                 },
                 function (err) {
                     console.log(JSON.stringify(err));
@@ -69,5 +67,18 @@
                 template: contenido
             });
         };
+
+        function _redireccionar() {
+            if (Inversion._getToken() != undefined){
+                console.log('bandera');
+                if (Inversion._getNombreRol() == "inversionista"){
+                    $state.go('app.reportes');
+                }else if (Inversion._getNombreRol() == "Administrador"){
+                    $state.go('app.cierre');
+                }else {
+                    $state.go('login');
+                }
+            }
+        }
     };
 })();
