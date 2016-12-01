@@ -4,7 +4,7 @@
     angular.module('starter')
         .controller('MenuController', MenuController);
 
-    function MenuController($state, $ionicSideMenuDelegate, $scope, $rootScope)
+    function MenuController($state, $ionicSideMenuDelegate, $scope)
     {
         var vm = this;
 
@@ -33,6 +33,14 @@
 
         function _init (){
             vm.nombre_completo = Inversion._getNombreCompleto();
-        };
+            if (localStorage.getItem('token') == undefined){
+                $state.go('login');
+                if (Inversion._getNombreRol() == "inversionista"){
+                    $state.go('app.reportes');
+                }else{
+                    $state.go('app.cierre');
+                }
+            }
+        }
     }
 })();

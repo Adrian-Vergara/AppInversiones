@@ -6,7 +6,7 @@
                 <label class="item item-input" style="border-top: 1px solid #ddd;">
                     <i class="icon ion-calendar distancia"></i>
                     <span class="input-label">Fecha Inicio</span>
-                    <input type="date">
+                    <input type="date"  ng-model="Fecha.FechaIni">
                 </label>
             </div>
             <div class="col col-20">
@@ -17,11 +17,11 @@
                 <label class="item item-input" style="border-top: 1px solid #ddd;">
                     <i class="icon ion-calendar distancia"></i>
                     <span class="input-label">Fecha Fin</span>
-                    <input type="date">
+                    <input type="date"  ng-model="Fecha.FechaFin">
                 </label>
             </div>
             <div class="col col-20">
-                <button class="button icon-left ion-search"></button>
+                <button class="button icon-left ion-search" ng-click="ReporteInversiones();"></button>
             </div>
         </div>
         <div class="card text-center">
@@ -38,7 +38,8 @@
         </div><br>
         <canvas id="line" class="chart chart-line" chart-data="data"
                 chart-labels="labels" chart-options="options"
-                chart-dataset-override="datasetOverride" chart-click="onClick" chart-colors="colors"
+                chart-dataset-override="datasetOverride" chart-click="onClick" chart-colors="colors">
+
         </canvas>
     </ion-content>
 </ion-view>

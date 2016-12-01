@@ -66,7 +66,6 @@
                     AlmacenTemporal.Nombre = $scope.almacenes[0].nombre;
                     AlmacenTemporal.Direccion = $scope.almacenes[0].direccion;
                     AlmacenTemporal.Correo = $scope.almacenes[0].correo;
-                    console.log(AlmacenTemporal);
                 }
                 else{
                     var AlmacenTemporal = {};
@@ -75,8 +74,9 @@
                     AlmacenTemporal.Nombre = $scope.reporte.ListadoAlmacenes.nombre;
                     AlmacenTemporal.Direccion = $scope.reporte.ListadoAlmacenes.direccion;
                     AlmacenTemporal.Correo = $scope.reporte.ListadoAlmacenes.correo;
-                    //Datos es lo que se va a enviar para hacer la consulta es igual en todos los reportes
                 }
+
+                //Datos es lo que se va a enviar para hacer la consulta es igual en todos los reportes
                 $scope.Datos.ListadoAlmacenes.push(AlmacenTemporal);
                 var promisePost = ReportesService.ReporteVentas($scope.Datos);
                 promisePost.then(
@@ -113,10 +113,6 @@
                     $scope.datos[1][j] = $scope.ventas[j].bancos;
                     $scope.datos[2][j] = $scope.ventas[j].venta;
                 }
-                //}
-                console.log($scope.series);
-                console.log($scope.labels);
-                console.log($scope.datos);
         }
 
         $scope.colors= [

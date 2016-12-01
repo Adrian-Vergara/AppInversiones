@@ -43,11 +43,6 @@
             __init();
         });*/
 
-        __init();
-
-        function __init() {
-        }
-
         function _showAlert(titulo, contenido) {
             var alertPopup = $ionicPopup.alert({
                 title: titulo,
@@ -73,7 +68,7 @@
                             'Bancos': 0
                         };
                     }
-                    else{
+                    else {
                         titulo = "Error!";
                     }
                     contenido = respuesta.mensagge;

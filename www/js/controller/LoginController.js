@@ -50,7 +50,12 @@
                     Inversion._setIdUsuario(respuesta.id);
                     Inversion._setNombreRol(respuesta.roles[0]);
                     $rootScope.rol = Inversion._getNombreRol();
-                    $state.go('app.cierre');
+                    if (Inversion._getNombreRol() == "inversionista"){
+                        $state.go('app.reportes');
+                    }
+                    else {
+                        $state.go('app.cierre');
+                    }
                 },
                 function (err) {
                     console.log(JSON.stringify(err));

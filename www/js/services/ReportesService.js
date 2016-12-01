@@ -19,7 +19,7 @@
             });
         };
 
-        this.ReportCostos = function (datos) {
+        this.ReporteCostos = function (datos) {
             return $http({
                 method: 'POST',
                 url: Inversion._getUrl() + 'apiv1/cierre/costos',
