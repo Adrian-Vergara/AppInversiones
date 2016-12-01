@@ -1,0 +1,38 @@
+<ion-modal-view>
+
+    <div class="bar bar-header" style="background-color: #0277bd;">
+        <button style="color:#fff;" ng-click="modal.hide()" class="button button-icon ion-chevron-left">
+            Cerrar
+        </button>
+        <h1 class="title" style="color: #fff;">Reporte de Ventas</h1>
+    </div>
+
+    <ion-content class="padding">
+        <br><br><br>
+        <div class="datagrid" id="modalVentas">
+            <table>
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Fecha</th>
+                        <th>Efectivo</th>
+                        <th>Bancos</th>
+                        <th>Total Ventas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in ventas">
+                        <td>{{$index + 1}}</td>
+                        <td>{{item.fecha | date}}</td>
+                        <td>${{item.efectivo | number}}</td>
+                        <td>${{item.bancos | number}}</td>
+                        <td>${{item.venta | number}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br><br>
+
+        <button class="button icon-left ion-android-print" ng-click="DownloadVentas()">Descargar Pdf</button>
+    </ion-content>
+</ion-modal-view>

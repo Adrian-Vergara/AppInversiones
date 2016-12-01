@@ -4,7 +4,7 @@
     angular.module('starter')
         .controller('MenuController', MenuController);
 
-    function MenuController($state, $ionicSideMenuDelegate, $scope)
+    function MenuController($state, $ionicSideMenuDelegate, $scope, $rootScope)
     {
         var vm = this;
 
@@ -12,8 +12,7 @@
             [
                 {'item': 'Cambiar Contraseña', 'icon': 'ion-locked', 'sref': 'app.password'},
                 {'item': 'Registro de Cierre', 'icon': 'ion-clipboard', 'sref': 'app.cierre'},
-                {'item': 'Reportes', 'icon': 'ion-stats-bars', 'sref': 'app.reportes'},
-                {'item': 'Almacenes', 'icon': 'ion-ios-home', 'sref': 'app.almacen'}
+                {'item': 'Reportes', 'icon': 'ion-stats-bars', 'sref': 'app.reportes'}
             ];
 
         /*$ionicHistory.nextViewOptions({

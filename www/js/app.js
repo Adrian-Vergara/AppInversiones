@@ -1,11 +1,15 @@
 (function () {
     'use strict';
 
-    angular.module('starter', ['ionic', 'chart.js', 'datatables'])
+    angular.module('starter', ['ionic', 'chart.js'])
 
         .run(function ($ionicPlatform, $rootScope) {
             $rootScope.AlmacenesSeleccionados = [];
             $rootScope.almacenes = [];
+            $rootScope.dataVentas = [];
+            $rootScope.labelVentas = [];
+            $rootScope.RVentas = [];
+            $rootScope.rol = "";
             $ionicPlatform.ready(function () {
                 if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
                     cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -21,11 +25,6 @@
 
             $stateProvider
 
-                /*.state('tab', {
-                    url: '/tab',
-                    abstract: true,
-                    templateUrl: 'templates/tabs.html'
-                })*/
                 .state('app', {
                     url: '/app',
                     abstract: true,

@@ -8,7 +8,7 @@
 
     app.controller('LoginController', LoginController);
 
-    function LoginController($ionicPopup, $scope, $state, LoginService, CierreService) {
+    function LoginController($ionicPopup, $scope, $state, LoginService, CierreService, $rootScope) {
         $scope.credenciales = {};
         $scope.loading = false;
 
@@ -33,6 +33,9 @@
                     GetUser();
                 },
                 function (error) {
+                    if(error.error == "invalid_grant"){
+                        _showAlert('Error', 'Credenciales Inválidas');
+                    }
                     console.log(JSON.stringify(error));
                 }
             )
@@ -45,6 +48,8 @@
                     var respuesta = data.data;
                     Inversion._setNombreCompleto(respuesta.fullName);
                     Inversion._setIdUsuario(respuesta.id);
+                    Inversion._setNombreRol(respuesta.roles[0]);
+                    $rootScope.rol = Inversion._getNombreRol();
                     $state.go('app.cierre');
                 },
                 function (err) {

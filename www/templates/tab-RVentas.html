@@ -1,30 +1,42 @@
 <ion-view view-title="Reporte de Ventas">
     <ion-content class="padding">
         <div class="row">
-            <div class="col col-30">
+            <div style="width: 80%">
                 <label class="item item-input" style="border-top: 1px solid #ddd;">
                     <i class="icon ion-calendar distancia"></i>
                     <span class="input-label fuente">Fecha Inicio</span>
-                    <input type="date">
+                    <input type="date" ng-model="Fecha.FechaIni">
                 </label>
             </div>
             <div class="col col-20">
-                <button class="button icon-left ion-android-print" ng-click="generatePDF()"></button>
+                <button class="button icon-left ion-search" ng-click="ReporteVentas();"></button>
             </div>
+
         </div>
         <div class="row">
-            <div class="col col-30">
+            <div style="width: 80%">
                 <label class="item item-input" style="border-top: 1px solid #ddd;">
                     <i class="icon ion-calendar distancia"></i>
                     <span class="input-label fuente">Fecha Fin</span>
-                    <input type="date">
+                    <input type="date" ng-model="Fecha.FechaFin">
                 </label>
             </div>
             <div class="col col-20">
-                <button class="button icon-left ion-search"></button>
+                <button class="button icon-left ion-android-print" ng-click="AbrirModalReporte()"></button>
             </div>
         </div>
 
+        <div class="row" ng-if="rol == 'inversionista'" >
+            <div style="width: 80%">
+                <label class="item item-input">
+                    <div class="input-label">
+                        Almacen:
+                    </div>
+                    <select ng-model="reporte.ListadoAlmacenes" ng-options="item as item.nombre for item in almacenes track by item.almacenId">
+                    </select>
+                </label>
+            </div>
+        </div>
         <div class="card text-center">
             <div class="item item-text-wrap" style="text-align:justify">
                 <h2 style="font-weight: bold; color: #5cb85c">Información General</h2>
@@ -32,41 +44,37 @@
             <div class="row" ng-repeat="item in ventas">
                 <a class="itemList item-icon-left text-left" style="width: 100%;">
                     <i class="icon ion-checkmark-circled" style="font-size: 18px; color: #666;"></i>
-                    <label style="color: #666; font-weight: bold;">{{item.mes}}</label>
-                    <label style="color: #5cb85c; font-weight: bold; margin-left: 25px; float: right;">${{item.total | number}}</label>
+                    <label style="color: #666; font-weight: bold;">{{item.fecha | date: "MMM dd yyyy"}}</label>
+                    <label style="color: #5cb85c; font-weight: bold; margin-left: 25px; float: right;">${{item.venta | number}}</label>
                 </a>
             </div>
         </div><br>
 
-        <table class="dataTable row-border hover" datatable="ng" dt-options="dtOptions" id="ViewVentasPdf">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>First name</th>
-                <th>Last name</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>Foo</td>
-                <td>Bar</td>
-            </tr>
-            <tr>
-                <td>123</td>
-                <td>Someone</td>
-                <td>Youknow</td>
-            </tr>
-            <tr>
-                <td>987</td>
-                <td>Iamout</td>
-                <td>Ofinspiration</td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="row" id="ViewVentasPdf">
+            <div class="col">
+                <table style="display: none">
+                    <caption>Reporte de Ventas de la fecha {{reporte.FechaInicio | date}} a la fecha {{reporte.FechaFin | date}}</caption>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Venta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-        <canvas id="line" class="chart chart-line" chart-data="data"
-                chart-labels="labels" chart-options="options"
+                    </tbody>
+                    <tr ng-repeat="item in ventas">
+                        <td>{{item.mes}}</td>
+                        <td>${{item.total | number}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <h1 class="title">{{titulo}}</h1>
+
+        <canvas id="bar" class="chart chart-bar" chart-data="datos"
+                chart-labels="labels" chart-options="options" chart-series="series"
                 chart-dataset-override="datasetOverride" chart-click="onClick" chart-colors="colors"
         </canvas>
 

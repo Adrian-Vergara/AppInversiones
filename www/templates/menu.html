@@ -18,9 +18,17 @@
                     <i class="icon ion-university"></i>
                     {{menu.nombre_completo}}
                 </label>
-                <a menu-close class="ItemMenu item-icon-left colorItemMenu" ui-sref="{{item.sref}}" ng-repeat="item in menu.ItemMenu">
-                    <i class="icon {{item.icon}}"></i>
-                    {{item.item}}
+                <a menu-close class="ItemMenu item-icon-left colorItemMenu" ui-sref="app.password">
+                    <i class="icon ion-locked"></i>
+                    Cambiar Contraseña
+                </a>
+                <a menu-close ng-if="rol == 'Administrador'" class="ItemMenu item-icon-left colorItemMenu" ui-sref="app.cierre">
+                    <i class="icon ion-clipboard"></i>
+                    Registro de Cierre
+                </a>
+                <a menu-close class="ItemMenu item-icon-left colorItemMenu" ui-sref="app.reportes">
+                    <i class="icon ion-stats-bars"></i>
+                    Reportes
                 </a>
                 <a menu-close ng-click="menu.cerrar_sesion()" class="ItemMenu item-icon-left colorItemMenu">
                     <i class="icon ion-power"></i>
