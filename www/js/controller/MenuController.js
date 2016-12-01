@@ -33,9 +33,7 @@
 
         function _init (){
             vm.nombre_completo = Inversion._getNombreCompleto();
-            console.log(Inversion._getToken() == undefined);
             if (Inversion._getToken() == undefined){
-                console.log(Inversion._getToken() == undefined);
                 $state.go('login');
                 if (Inversion._getNombreRol() == "inversionista"){
                     $state.go('app.reportes');

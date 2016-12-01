@@ -2,39 +2,42 @@
     <ion-content class="padding">
         <br>
         <div class="row">
-            <div class="col col-30">
+            <div style="width: 80%">
                 <label class="item item-input" style="border-top: 1px solid #ddd;">
                     <i class="icon ion-calendar distancia"></i>
-                    <span class="input-label">Fecha Inicio</span>
-                    <input type="date">
+                    <span class="input-label fuente">Fecha Inicio</span>
+                    <input type="date" ng-model="Fecha.FechaIni">
                 </label>
             </div>
             <div class="col col-20">
+                <button class="button icon-left ion-search" ng-click="ReporteBalance();"></button>
             </div>
+
         </div>
         <div class="row">
-            <div class="col col-30">
+            <div style="width: 80%">
                 <label class="item item-input" style="border-top: 1px solid #ddd;">
                     <i class="icon ion-calendar distancia"></i>
-                    <span class="input-label">Fecha Fin</span>
-                    <input type="date">
+                    <span class="input-label fuente">Fecha Fin</span>
+                    <input type="date" ng-model="Fecha.FechaFin">
                 </label>
             </div>
             <div class="col col-20">
-                <button class="button icon-left ion-search"></button>
+                <button class="button icon-left ion-android-print" ng-click="AbrirModalReporte()"></button>
             </div>
         </div>
+
         <div class="card text-center">
             <div class="item item-text-wrap" style="text-align:justify">
                 <h2 style="font-weight: bold; color: #666">Balance General</h2>
             </div>
-            <div class="row text-left" ng-repeat="item in BalanceGeneral">
+            <div class="row text-left" ng-repeat="item in costo">
                 <a class="itemList item-icon-left text-left" style="width: 100%;">
                     <i class="icon ion-checkmark-circled" style="font-size: 18px; color: #666;"></i>
                     <label style="color: #666; font-size: 14px; float: left; font-weight: bold; text-transform: capitalize">Fecha</label>
-                    <label style="color: #666; font-size: 14px; float: right; font-weight: bold; text-transform: capitalize">{{item.mes}}</label><br>
+                    <label style="color: #666; font-size: 14px; float: right; font-weight: bold; text-transform: capitalize">{{item.fecha}}</label><br>
                     <label style="color: #00ADF9; font-size: 14px; font-weight: bold;">Inversiones</label>
-                    <label style="color: #00ADF9; font-size: 14px; float: right; font-weight: bold;">${{item.totalInversiones | number}}</label><br>
+                    <label style="color: #00ADF9; font-size: 14px; float: right; font-weight: bold;">${{item.totalCostos | number}}</label><br>
 
                     <label style="color: #d9534f; font-size: 14px; font-weight: bold;">Gastos</label>
                     <label style="color: #d9534f; font-size: 14px; font-weight: bold; float: right;">${{item.totalGastos | number}}</label><br>
@@ -44,9 +47,9 @@
                 </a>
             </div>
         </div>
-        <canvas id="line" class="chart chart-line" chart-data="data"
-                chart-labels="labels" chart-series="series" chart-options="options"
-                chart-dataset-override="datasetOverride" chart-click="onClick" chart-colors="colors"
+        <canvas id="bar" class="chart chart-bar" chart-data="datos"
+                chart-labels="labels" chart-series="series"
+                chart-dataset-override="datasetOverride" chart-click="onClick" chart-colors="colors">
         </canvas>
     </ion-content>
 </ion-view>

@@ -11,10 +11,14 @@
     function ReporteInversionesController($scope, $state, $filter, $rootScope, ReportesService, AlmacenService, $ionicModal, $ionicPopup) {
         //Declaración de variables
         $rootScope.rol = Inversion._getNombreRol();
+
         $scope.labels = [];
         $scope.series = [];
         $scope.datos = [];
+
         $scope.Almacen = {};
+        $scope.costo = [];
+        $scope.inversiones = [];
         $scope.index = -1;
         $scope.Fecha = {'FechaIni': '', 'FechaFin': ''};
         $scope.reporte = {
@@ -59,36 +63,14 @@
                 $scope.Datos.FechaIni = ($filter("date")($scope.Fecha.FechaIni, "yyyy-MM-dd 00:00:00.000"));
                 $scope.Datos.FechaFin = ($filter("date")($scope.Fecha.FechaFin, "yyyy-MM-dd 00:00:00.000"));
                 var AlmacenTemporal = {};
+                _upAlmacenesInverisonistas();
 
-                if($rootScope.rol == 'Administrador'){
-                    //Toca así porque ricardo tiene full desorden con el nombre de las variables
-                    AlmacenTemporal.AlmacenId = $scope.almacenes[0].almacenId;
-                    AlmacenTemporal.Nombre = $scope.almacenes[0].nombre;
-                    AlmacenTemporal.Direccion = $scope.almacenes[0].direccion;
-                    AlmacenTemporal.Correo = $scope.almacenes[0].correo;
-                    console.log(AlmacenTemporal);
-                }
-                else{
-
-                    //Toca así porque ricardo tiene full desorden con el nombre de las variables
-                    AlmacenTemporal.AlmacenId = $scope.reporte.ListadoAlmacenes.almacenId;
-                    AlmacenTemporal.Nombre = $scope.reporte.ListadoAlmacenes.nombre;
-                    AlmacenTemporal.Direccion = $scope.reporte.ListadoAlmacenes.direccion;
-                    AlmacenTemporal.Correo = $scope.reporte.ListadoAlmacenes.correo;
-                    //Datos es lo que se va a enviar para hacer la consulta es igual en todos los reportes
-                }
-
-                //Datos es lo que se va a enviar para hacer la consulta es igual en todos los reportes
-                console.log($scope.Datos);
-                $scope.Datos.ListadoAlmacenes.push(AlmacenTemporal);
                 var promisePost = ReportesService.ReporteCostos($scope.Datos);
                 promisePost.then(
                     function (data) {
                         var respuesta = data.data;
                         if(respuesta.errors.length == 0){
-
-                            console.log(respuesta);
-                            //Graficar();
+                            Graficar(respuesta.data.costosPorAlmacen);
                         }
                         else{
                             _showAlert('Error', 'No hay registros de cierre almacenados');
@@ -101,24 +83,41 @@
             }
         };
 
-        function Graficar() {
-            for(var m=0; m < 3; m++){
-                $scope.datos[m] = new Array($scope.ventas[0].length);
+        function _upAlmacenesInverisonistas() {
+            var AlmacenTemporal = {};
+            for(var m=0; m < 1; m++){
+                AlmacenTemporal.AlmacenId = $scope.almacenes[m].almacenId;
+                AlmacenTemporal.Nombre = $scope.almacenes[m].nombre;
+                AlmacenTemporal.Direccion = $scope.almacenes[m].direccion;
+                AlmacenTemporal.Correo = $scope.almacenes[m].correo;
+                $scope.Datos.ListadoAlmacenes.push(AlmacenTemporal);
             }
 
-            //for(var i in $scope.ventas){
-            $scope.series = ["Efectivo", "Bancos", "Ventas"];
-            for(var j in $scope.ventas){
-                $scope.ventas[j].fecha = new Date($scope.ventas[j].fecha);
-                $scope.labels[j] = ($filter("date")($scope.ventas[j].fecha, 'MMM dd yyyy'));
-                $scope.datos[0][j] = $scope.ventas[j].efectivo;
-                $scope.datos[1][j] = $scope.ventas[j].bancos;
-                $scope.datos[2][j] = $scope.ventas[j].venta;
+        }
+
+        function Graficar(datos) {
+            for(var m=0; m < datos.length; m++){
+
+                $scope.inversiones[m] = datos[m].costos;
+                $scope.series[m] = datos[m].almacen.nombre;
+
             }
-            //}
-            console.log($scope.series);
-            console.log($scope.labels);
-            console.log($scope.datos);
+
+            var k = 0;
+            var costo = [];
+
+            for(var i=0; i < $scope.inversiones.length; i++){
+
+                for(var j=0; j < $scope.inversiones[i].length; j++){
+
+                    $scope.labels[k] = $scope.inversiones[i][j].fecha;
+                    k++;
+                    costo[j] = $scope.inversiones[i][j].total;
+                }
+                $scope.costo = $scope.inversiones[i];
+
+                $scope.datos.push(costo);
+            }
         }
 
         $scope.colors= [
@@ -171,6 +170,7 @@
                     else{
                         $scope.almacenes = respuesta.inversiones;
                     }
+                    console.log($scope.almacenes);
                 },
                 function (err) {
                     console.log(JSON.stringify(err));

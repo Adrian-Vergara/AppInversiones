@@ -8,48 +8,200 @@
 
     app.controller('ReporteBalanceGeneralController', ReporteBalanceGeneralController);
 
-    function ReporteBalanceGeneralController($scope, $state) {
+    function ReporteBalanceGeneralController($scope, $filter, $rootScope, ReportesService, AlmacenService, $ionicModal, $ionicPopup) {
+        //Declaración de variables
+        $rootScope.rol = Inversion._getNombreRol();
+
+        $scope.labels = [];
+        $scope.series = [];
+        $scope.datos = [];
+
+        $scope.Almacen = {};
+        $scope.costo = [];
+        $scope.balances = [];
+        $scope.index = -1;
+        $scope.Fecha = {'FechaIni': '', 'FechaFin': ''};
+        $scope.reporte = {
+            'ListadoAlmacenes': []
+        };
+
+        $scope.Datos = {
+            'FechaIni': '',
+            'FechaFin': '',
+            'ListadoAlmacenes': []
+        };
+
+        //Declaración de funciones
+        $scope.AbrirModalReporte = AbrirModalReporte;
+        $scope.Graficar = Graficar;
+        $scope.DownloadBalance = DownloadBalance;
+        $scope.almacenes = [];
+        $scope.ReporteBalance = ReporteBalance;
+
+
+        //Funcion que se ejecuta cuando carga el controller
         __init();
 
         function __init() {
+            GetAlmacenes();
+            CrearModal();
         }
 
-        $scope.labels = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"];
-        $scope.series = ['Inversiones', 'Gastos', 'Ventas'];
-        $scope.data = [
-            [780000, 590000, 800000, 810000, 560000, 550000, 400000],
-            [380000, 470000, 400000, 190000, 860000, 270000, 900000],
-            [1700000, 3100000, 2100000, 1250000, 3420000, 1890000, 4050000]
-        ];
-
-        $scope.BalanceGeneral =
-            [
-                {'mes': 'Enero', 'totalVentas': 1700000, 'totalGastos': 380000, 'totalInversiones': 780000},
-                {'mes': 'Febrero', 'totalVentas': 3100000, 'totalGastos': 470000, 'totalInversiones': 590000},
-                {'mes': 'Marzo', 'totalVentas': 2100000, 'totalGastos': 400000, 'totalInversiones': 800000},
-                {'mes': 'Abril', 'totalVentas': 1250000, 'totalGastos': 190000, 'totalInversiones': 810000},
-                {'mes': 'Mayo', 'totalVentas': 3420000, 'totalGastos': 860000, 'totalInversiones': 560000},
-                {'mes': 'Junio', 'totalVentas': 1890000, 'totalGastos': 270000, 'totalInversiones': 550000},
-                {'mes': 'julio', 'totalVentas': 4050000, 'totalGastos': 900000, 'totalInversiones': 400000}
-            ];
-
-        $scope.onClick = function (points, evt) {
-            console.log(points, evt);
+        function CrearModal() {
+            $ionicModal.fromTemplateUrl('templates/modalVentas.html', {
+                scope: $scope
+            }).then(function(modal) {
+                $scope.modal = modal;
+            });
         };
 
+        function ReporteBalance(){
+            if($scope.Fecha.FechaIni == '' || $scope.Fecha.FechaFin == ''){
+                _showAlert('Error', 'Verifique que los campos no estén vacíos');
+            }
+            else{
+                $scope.Datos.FechaIni = ($filter("date")($scope.Fecha.FechaIni, "yyyy-MM-dd 00:00:00.000"));
+                $scope.Datos.FechaFin = ($filter("date")($scope.Fecha.FechaFin, "yyyy-MM-dd 00:00:00.000"));
+
+                _upAlmacenesInverisonistas();
+
+                var promisePost = ReportesService.ReporteBalance($scope.Datos);
+                promisePost.then(
+                    function (data) {
+                        var respuesta = data.data;
+                        if(respuesta.errors.length == 0){
+
+                            Graficar(respuesta.data.balancePorAlmacen);
+                        }
+                        else{
+                            _showAlert('Error', 'No hay registros de cierre almacenados');
+                        }
+                    },
+                    function (err) {
+                        console.log(JSON.stringify(err));
+                    }
+                )
+            }
+        };
+
+        function _upAlmacenesInverisonistas() {
+            var AlmacenTemporal = {};
+            for(var m=0; m < 1; m++){
+                AlmacenTemporal.AlmacenId = $scope.almacenes[m].almacenId;
+                AlmacenTemporal.Nombre = $scope.almacenes[m].nombre;
+                AlmacenTemporal.Direccion = $scope.almacenes[m].direccion;
+                AlmacenTemporal.Correo = $scope.almacenes[m].correo;
+                $scope.Datos.ListadoAlmacenes.push(AlmacenTemporal);
+            }
+
+        }
+
+        function Graficar(datos) {
+
+            $scope.series[m] = ["Costos","Gastos","Ventas","Utilidades"];
+
+            for(var m=0; m < datos.length; m++){
+
+                $scope.balances[m] = datos[m].balances;
+
+            }
+
+            var k = 0;
+            var costo = [];
+            var gasto = [];
+            var venta = [];
+            var utilidad = [];
+
+            console.log(datos);
+
+            for(var i=0; i < $scope.balances.length; i++){
+
+                for(var j=0; j < $scope.balances[i].length; j++){
+
+                    $scope.labels[k] = $scope.balances[i][j].fecha;
+                    k++;
+                    costo[j] = $scope.balances[i][j].totalCostos;
+                    gasto[j] = $scope.balances[i][j].totalGastos;
+                    venta[j] = $scope.balances[i][j].totalVentas;
+                    utilidad[j] = $scope.balances[i][j].utilidad;
+
+                }
+                $scope.costo = $scope.balances[i];
+                console.log($scope.costo);
+                $scope.datos.push(costo);
+                $scope.datos.push(gasto);
+                $scope.datos.push(venta);
+                $scope.datos.push(utilidad);
+            }
+        }
+
         $scope.colors= [
+            {
+                backgroundColor: "rgba(0, 171, 185, 0.30)",
+                borderColor: "rgba(0, 171, 185, 1)"
+            },
             {
                 backgroundColor: "rgba(162, 224, 252, 0.30)",
                 borderColor:"#00ADF9"
             },
             {
-                backgroundColor: "rgba(244, 149, 146, 0.30)",
-                borderColor:"#d9534f"
-            },
-            {
-                backgroundColor: "rgba(92, 184, 92, 0.30)",
+                backgroundColor: "rgba(92, 184, 92, 0.40)",
                 borderColor:"#5cb85c"
             }
         ];
+
+        //Codigo para imprimir, solamente le cambias la url de el template que va a imprimir
+        function DownloadBalance() {
+            if($scope.ventas.length == 0){
+                _showAlert('Error', 'No hay datos para imprimir');
+            }
+            else{
+                kendo.drawing.drawDOM($("#modalVentas"))
+                    .then(function(group) {
+                        return kendo.drawing.exportPDF(group, {
+                            paperSize: "auto",
+                            margin: { left: "1cm", top: "1cm", right: "1cm", bottom: "1cm" }
+                        });
+                    })
+                    .done(function(data) {
+                        kendo.saveAs({
+                            dataURI: data,
+                            fileName: "ReporteVentas.pdf",
+                            proxyURL: "templates/modalVentas.html"
+                        });
+                    });
+            }
+        };
+
+        /**/
+        function GetAlmacenes() {
+            var promiseGet = AlmacenService.GetAlmacenes();
+            promiseGet.then(
+                function (data) {
+                    var respuesta = data.data;
+                    if($rootScope.rol == 'Administrador'){
+                        $scope.almacenes = respuesta.admin;
+                    }
+                    else{
+                        $scope.almacenes = respuesta.inversiones;
+                    }
+                    console.log($scope.almacenes);
+                },
+                function (err) {
+                    console.log(JSON.stringify(err));
+                }
+            )
+        }
+
+        function AbrirModalReporte() {
+            $scope.modal.show();
+        };
+
+        function _showAlert(titulo, contenido) {
+            var alertPopup = $ionicPopup.alert({
+                title: titulo,
+                template: contenido
+            });
+        };
     }
 })();
