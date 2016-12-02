@@ -48,7 +48,7 @@
         }
 
         function CrearModal() {
-            $ionicModal.fromTemplateUrl('templates/modalVentas.html', {
+            $ionicModal.fromTemplateUrl('templates/modalInversiones.html', {
                 scope: $scope
             }).then(function(modal) {
                 $scope.modal = modal;
@@ -137,11 +137,11 @@
 
         //Codigo para imprimir, solamente le cambias la url de el template que va a imprimir
         function DownloadInversiones() {
-            if($scope.ventas.length == 0){
+            if($scope.costo.length == 0){
                 _showAlert('Error', 'No hay datos para imprimir');
             }
             else{
-                kendo.drawing.drawDOM($("#modalVentas"))
+                kendo.drawing.drawDOM($("#modalCostos"))
                     .then(function(group) {
                         return kendo.drawing.exportPDF(group, {
                             paperSize: "auto",
@@ -151,8 +151,8 @@
                     .done(function(data) {
                         kendo.saveAs({
                             dataURI: data,
-                            fileName: "ReporteVentas.pdf",
-                            proxyURL: "templates/modalVentas.html"
+                            fileName: "ReporteInversiones.pdf",
+                            proxyURL: "templates/modalInversiones.html"
                         });
                     });
             }
@@ -170,7 +170,6 @@
                     else{
                         $scope.almacenes = respuesta.inversiones;
                     }
-                    console.log($scope.almacenes);
                 },
                 function (err) {
                     console.log(JSON.stringify(err));

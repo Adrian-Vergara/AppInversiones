@@ -1,0 +1,36 @@
+<ion-modal-view>
+
+    <div class="bar bar-header" style="background-color: #0277bd;">
+        <button style="color:#fff;" ng-click="modal.hide()" class="button button-icon ion-chevron-left">
+            Cerrar
+        </button>
+        <h1 class="title" style="color: #fff;">Reporte de Costos</h1>
+    </div>
+
+    <ion-content class="padding">
+        <br><br><br>
+        <div class="datagrid" id="modalCostos">
+            <table>
+                <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Facturas</th>
+                    <th>Costo</th>
+                    <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in costo">
+                    <td>{{item.fecha | date}}</td>
+                    <td>${{item.facturas | number}}</td>
+                    <td>${{item.invercion | number}}</td>
+                    <td>${{item.total | number}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <br><br>
+
+        <button class="button icon-left ion-android-print" ng-click="DownloadInversiones()">Descargar Pdf</button>
+    </ion-content>
+</ion-modal-view>

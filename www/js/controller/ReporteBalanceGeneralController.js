@@ -48,7 +48,7 @@
         }
 
         function CrearModal() {
-            $ionicModal.fromTemplateUrl('templates/modalVentas.html', {
+            $ionicModal.fromTemplateUrl('templates/modalBalance.html', {
                 scope: $scope
             }).then(function(modal) {
                 $scope.modal = modal;
@@ -112,8 +112,6 @@
             var venta = [];
             var utilidad = [];
 
-            console.log(datos);
-
             for(var i=0; i < $scope.balances.length; i++){
 
                 for(var j=0; j < $scope.balances[i].length; j++){
@@ -127,7 +125,6 @@
 
                 }
                 $scope.costo = $scope.balances[i];
-                console.log($scope.costo);
                 $scope.datos.push(costo);
                 $scope.datos.push(gasto);
                 $scope.datos.push(venta);
@@ -152,11 +149,11 @@
 
         //Codigo para imprimir, solamente le cambias la url de el template que va a imprimir
         function DownloadBalance() {
-            if($scope.ventas.length == 0){
+            if($scope.costo.length == 0){
                 _showAlert('Error', 'No hay datos para imprimir');
             }
             else{
-                kendo.drawing.drawDOM($("#modalVentas"))
+                kendo.drawing.drawDOM($("#modalBalance"))
                     .then(function(group) {
                         return kendo.drawing.exportPDF(group, {
                             paperSize: "auto",
@@ -166,8 +163,8 @@
                     .done(function(data) {
                         kendo.saveAs({
                             dataURI: data,
-                            fileName: "ReporteVentas.pdf",
-                            proxyURL: "templates/modalVentas.html"
+                            fileName: "ReporteBalanceGeneral.pdf",
+                            proxyURL: "templates/modalBalance.html"
                         });
                     });
             }
@@ -185,7 +182,6 @@
                     else{
                         $scope.almacenes = respuesta.inversiones;
                     }
-                    console.log($scope.almacenes);
                 },
                 function (err) {
                     console.log(JSON.stringify(err));
