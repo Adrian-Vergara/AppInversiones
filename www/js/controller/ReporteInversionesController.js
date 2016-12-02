@@ -84,18 +84,35 @@
         };
 
         function _upAlmacenesInverisonistas() {
+            $scope.Datos.ListadoAlmacenes = [];
             var AlmacenTemporal = {};
-            for(var m=0; m < 1; m++){
-                AlmacenTemporal.AlmacenId = $scope.almacenes[m].almacenId;
-                AlmacenTemporal.Nombre = $scope.almacenes[m].nombre;
-                AlmacenTemporal.Direccion = $scope.almacenes[m].direccion;
-                AlmacenTemporal.Correo = $scope.almacenes[m].correo;
-                $scope.Datos.ListadoAlmacenes.push(AlmacenTemporal);
+            if($rootScope.rol == 'Administrador'){
+                AlmacenTemporal = {};
+                //Toca así porque ricardo tiene full desorden con el nombre de las variables
+                AlmacenTemporal.AlmacenId = $scope.almacenes[0].almacenId;
+                AlmacenTemporal.Nombre = $scope.almacenes[0].nombre;
+                AlmacenTemporal.Direccion = $scope.almacenes[0].direccion;
+                AlmacenTemporal.Correo = $scope.almacenes[0].correo;
             }
+            else{
+                AlmacenTemporal = {};
+                //Toca así porque ricardo tiene full desorden con el nombre de las variables
+                AlmacenTemporal.AlmacenId = $scope.reporte.ListadoAlmacenes.almacenId;
+                AlmacenTemporal.Nombre = $scope.reporte.ListadoAlmacenes.nombre;
+                AlmacenTemporal.Direccion = $scope.reporte.ListadoAlmacenes.direccion;
+                AlmacenTemporal.Correo = $scope.reporte.ListadoAlmacenes.correo;
+            }
+            $scope.Datos.ListadoAlmacenes.push(AlmacenTemporal);
 
         }
 
         function Graficar(datos) {
+
+            $scope.labels = [];
+            $scope.series = [];
+            $scope.datos = [];
+
+            console.log(datos);
             for(var m=0; m < datos.length; m++){
 
                 $scope.inversiones[m] = datos[m].costos;

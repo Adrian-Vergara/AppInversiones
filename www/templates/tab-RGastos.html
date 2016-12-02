@@ -27,6 +27,18 @@
             </div>
         </div>
 
+        <div class="row" ng-if="rol == 'inversionista'" >
+            <div style="width: 80%">
+                <label class="item item-input">
+                    <div class="input-label">
+                        Almacen:
+                    </div>
+                    <select ng-model="reporte.ListadoAlmacenes" ng-options="item as item.nombre for item in almacenes track by item.almacenId">
+                    </select>
+                </label>
+            </div>
+        </div>
+
         <div class="card text-center">
             <div class="item item-text-wrap" style="text-align:justify">
                 <h2 style="font-weight: bold; color: #d9534f">Información General</h2>
@@ -40,7 +52,7 @@
             </div>
         </div><br>
 
-        <canvas id="line" class="chart chart-line" chart-data="datos"
+        <canvas id="bar" class="chart chart-bar" chart-data="datos"
                 chart-labels="labels"
                 chart-dataset-override="datasetOverride" chart-click="onClick" chart-colors="colors">
         </canvas>

@@ -27,6 +27,18 @@
             </div>
         </div>
 
+        <div class="row" ng-if="rol == 'inversionista'" >
+            <div style="width: 80%">
+                <label class="item item-input">
+                    <div class="input-label">
+                        Almacen:
+                    </div>
+                    <select ng-model="reporte.ListadoAlmacenes" ng-options="item as item.nombre for item in almacenes track by item.almacenId">
+                    </select>
+                </label>
+            </div>
+        </div>
+
         <div class="card text-center">
             <div class="item item-text-wrap" style="text-align:justify">
                 <h2 style="font-weight: bold; color: #00ADF9">Información General</h2>
@@ -34,12 +46,22 @@
             <div class="row" ng-repeat="item in costo">
                 <a class="itemList item-icon-left text-left" style="width: 100%;">
                     <i class="icon ion-checkmark-circled" style="font-size: 18px; color: #666;"></i>
-                    <label style="color: #666; font-weight: bold;">{{item.fecha}}</label>
-                    <label style="color: #00ADF9; font-weight: bold; margin-left: 25px; float: right;">${{item.total | number}}</label>
+
+                    <label style="color: #666; font-size: 14px; float: left; font-weight: bold; text-transform: capitalize">Fecha</label>
+                    <label style="color: #666; font-size: 14px; float: right; font-weight: bold; text-transform: capitalize">{{item.fecha | date: "MMM dd yyyy"}}</label><br>
+                    <label style="color: #00ADF9; font-size: 14px; font-weight: bold;">Factura</label>
+                    <label style="color: #00ADF9; font-size: 14px; float: right; font-weight: bold;">${{item.facturas | number}}</label><br>
+
+                    <label style="color: rgba(13, 71, 161, 1); font-size: 14px; font-weight: bold;">Inversion</label>
+                    <label style="color: rgba(13, 71, 161, 1); font-size: 14px; font-weight: bold; float: right;">${{item.invercion | number}}</label><br>
+
+                    <label style="color: #5cb85c; font-size: 14px; font-weight: bold;">Total</label>
+                    <label style="color: #5cb85c; font-size: 14px; float: right; font-weight: bold;">${{item.total | number}}</label>
+
                 </a>
             </div>
         </div><br>
-        <canvas id="line" class="chart chart-line" chart-data="datos"
+        <canvas id="bar" class="chart chart-bar" chart-data="datos"
                 chart-labels="labels"
                 chart-dataset-override="datasetOverride" chart-click="onClick" chart-colors="colors">
 
