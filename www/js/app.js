@@ -109,7 +109,7 @@
                     }
                 });
 
-            $urlRouterProvider.otherwise('/app/cierre');
+            $urlRouterProvider.otherwise('/login');
 
         });
 })();

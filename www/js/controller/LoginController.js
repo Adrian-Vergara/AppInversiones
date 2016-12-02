@@ -70,6 +70,7 @@
 
         function _redireccionar() {
             if (Inversion._getToken() != undefined){
+                $scope.credenciales = {};
                 if (Inversion._getNombreRol() == "inversionista"){
                     $state.go('app.reportes');
                 }else if (Inversion._getNombreRol() == "Administrador"){
