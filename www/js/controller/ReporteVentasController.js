@@ -34,6 +34,7 @@
         $scope.DownloadVentas = DownloadVentas;
         $scope.almacenes = [];
         $scope.ReporteVentas = ReporteVentas;
+        $scope.ventas = [];
 
 
         //Funcion que se ejecuta cuando carga el controller
@@ -83,10 +84,15 @@
                     function (data) {
                         var respuesta = data.data;
                         if(respuesta.errors.length == 0){
-                            $scope.titulo = respuesta.data.ventasPorAlmacen[0].almacen.nombre;
-                            $scope.ventas = respuesta.data.ventasPorAlmacen[0].ventas;
-                            console.log(respuesta);
-                            Graficar();
+                            if(respuesta.data.totalVentas == 0){
+                                _showAlert('Error', 'No hay cierres registrados en el rango de fecha establecido');
+                            }
+                            else{
+                                $scope.titulo = respuesta.data.ventasPorAlmacen[0].almacen.nombre;
+                                $scope.ventas = respuesta.data.ventasPorAlmacen[0].ventas;
+                                console.log(respuesta);
+                                Graficar();
+                            }
                         }
                         else{
                             _showAlert('Error', 'No hay registros de cierre almacenados');
@@ -173,7 +179,12 @@
         }
         
         function AbrirModalReporte() {
-            $scope.modal.show();
+            if($scope.ventas.length == 0){
+                _showAlert('Error', 'No hay datos para imprimir');
+            }
+            else{
+                $scope.modal.show();
+            }
         };
 
         function _showAlert(titulo, contenido) {
