@@ -90,8 +90,7 @@
                             else{
                                 $scope.titulo = respuesta.data.ventasPorAlmacen[0].almacen.nombre;
                                 $scope.ventas = respuesta.data.ventasPorAlmacen[0].ventas;
-                                console.log(respuesta.data.ventasPorAlmacen[0].ventas);
-                                //Graficar();
+                                Graficar();
                             }
                         }
                         else{

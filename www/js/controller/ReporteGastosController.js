@@ -56,14 +56,15 @@
         };
 
         function ReporteGastos(){
-            if($scope.Fecha.FechaIni == '' || $scope.Fecha.FechaFin == ''){
+
+            _upAlmacenesInverisonistas();
+
+            if($scope.Fecha.FechaIni == '' || $scope.Fecha.FechaFin == '' || $scope.Datos.ListadoAlmacenes[0].AlmacenId == undefined){
                 _showAlert('Error', 'Verifique que los campos no estén vacíos');
             }
             else{
                 $scope.Datos.FechaIni = ($filter("date")($scope.Fecha.FechaIni, "yyyy-MM-dd 00:00:00.000"));
                 $scope.Datos.FechaFin = ($filter("date")($scope.Fecha.FechaFin, "yyyy-MM-dd 00:00:00.000"));
-
-                _upAlmacenesInverisonistas();
 
                 var promisePost = ReportesService.ReporteGastos($scope.Datos);
                 promisePost.then(
