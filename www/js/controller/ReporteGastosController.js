@@ -67,15 +67,23 @@
                 $scope.Datos.FechaFin = ($filter("date")($scope.Fecha.FechaFin, "yyyy-MM-dd 00:00:00.000"));
 
                 var promisePost = ReportesService.ReporteGastos($scope.Datos);
+                $scope.labels = [];
+                $scope.datos = [];
+                $scope.titulo = "";
+                $scope.costo = [];
                 promisePost.then(
                     function (data) {
                         var respuesta = data.data;
-                        if(respuesta.errors.length == 0){
-
-                            Graficar(respuesta.data.costosPorAlmacen);
+                        if(respuesta.data.totalGastos == 0){
+                            _showAlert('Error', 'No hay registro de cierre almacenados en el rango de fecha establecido');
                         }
                         else{
-                            _showAlert('Error', 'No hay registros de cierre almacenados');
+                            if(respuesta.errors.length == 0){
+                                Graficar(respuesta.data.costosPorAlmacen);
+                            }
+                            else{
+                                _showAlert('Error', 'No hay registros de cierre almacenados');
+                            }
                         }
                     },
                     function (err) {
@@ -126,8 +134,8 @@
             for(var i=0; i < $scope.gastos.length; i++){
 
                 for(var j=0; j < $scope.gastos[i].length; j++){
-
-                    $scope.labels[k] = $scope.gastos[i][j].fecha;
+                    $scope.gastos[i][j].fecha = new Date($scope.gastos[i][j].fecha);
+                    $scope.labels[k] = ($filter("date") ($scope.gastos[i][j].fecha, 'MMM dd yyyy'));
                     k++;
                     costo[j] = $scope.gastos[i][j].gastos;
                 }
@@ -139,16 +147,8 @@
 
         $scope.colors= [
             {
-                backgroundColor: "rgba(0, 171, 185, 0.30)",
-                borderColor: "rgba(0, 171, 185, 1)"
-            },
-            {
-                backgroundColor: "rgba(162, 224, 252, 0.30)",
-                borderColor:"#00ADF9"
-            },
-            {
-                backgroundColor: "rgba(92, 184, 92, 0.40)",
-                borderColor:"#5cb85c"
+                backgroundColor: "rgba(217, 83, 79, 0.30)",
+                borderColor: "rgba(217, 83, 79, 1)"
             }
         ];
 

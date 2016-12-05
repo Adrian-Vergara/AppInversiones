@@ -51,35 +51,14 @@
                     <label style="color: #00ADF9; font-size: 14px; font-weight: bold;">Efectivo</label>
                     <label style="color: #00ADF9; font-size: 14px; float: right; font-weight: bold;">${{item.efectivo | number}}</label><br>
 
-                    <label style="color: rgba(13, 71, 161, 1); font-size: 14px; font-weight: bold;">Bancos</label>
-                    <label style="color: rgba(13, 71, 161, 1); font-size: 14px; font-weight: bold; float: right;">${{item.bancos | number}}</label><br>
+                    <label style="color: rgba(240, 173, 78, 1); font-size: 14px; font-weight: bold;">Bancos</label>
+                    <label style="color: rgba(240, 173, 78, 1); font-size: 14px; font-weight: bold; float: right;">${{item.bancos | number}}</label><br>
 
                     <label style="color: #5cb85c; font-size: 14px; font-weight: bold;">Ventas</label>
                     <label style="color: #5cb85c; font-size: 14px; float: right; font-weight: bold;">${{item.venta | number}}</label>
                 </a>
             </div>
         </div><br>
-
-        <div class="row" id="ViewVentasPdf">
-            <div class="col">
-                <table style="display: none">
-                    <caption>Reporte de Ventas de la fecha {{reporte.FechaInicio | date}} a la fecha {{reporte.FechaFin | date}}</caption>
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Venta</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                    <tr ng-repeat="item in ventas">
-                        <td>{{item.mes}}</td>
-                        <td>${{item.total | number}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
 
         <h1 class="title">{{titulo}}</h1>
 

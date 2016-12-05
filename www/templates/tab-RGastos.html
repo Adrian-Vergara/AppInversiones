@@ -46,7 +46,7 @@
             <div class="row" ng-repeat="item in costo">
                 <a class="itemList item-icon-left text-left" style="width: 100%;">
                     <i class="icon ion-checkmark-circled" style="font-size: 18px; color: #666;"></i>
-                    <label style="color: #666; font-weight: bold;">{{item.fecha}}</label>
+                    <label style="color: #666; font-weight: bold;">{{item.fecha | date: "MMM dd yyyy"}}</label>
                     <label style="color: #d9534f; font-weight: bold; margin-left: 25px; float: right;">${{item.gastos | number}}</label>
                 </a>
             </div>
