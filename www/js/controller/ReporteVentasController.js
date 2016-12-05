@@ -79,6 +79,10 @@
 
                 //Datos es lo que se va a enviar para hacer la consulta es igual en todos los reportes
                 $scope.Datos.ListadoAlmacenes.push(AlmacenTemporal);
+                $scope.ventas = [];
+                $scope.labels = [];
+                $scope.datos = [];
+                $scope.titulo = "";
                 var promisePost = ReportesService.ReporteVentas($scope.Datos);
                 promisePost.then(
                     function (data) {
@@ -126,8 +130,8 @@
                 borderColor: "rgba(0, 171, 185, 1)"
             },
             {
-                backgroundColor: "rgba(162, 224, 252, 0.30)",
-                borderColor:"#00ADF9"
+                backgroundColor: "rgba(240, 173, 78, 0.30)",
+                borderColor:"rgba(240, 173, 78, 1)"
             },
             {
                 backgroundColor: "rgba(92, 184, 92, 0.40)",
