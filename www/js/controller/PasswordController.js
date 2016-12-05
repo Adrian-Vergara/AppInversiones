@@ -8,14 +8,15 @@
 
     app.controller('PasswordController',PasswordController);
 
-    function PasswordController($scope, $ionicPopup) {
+    function PasswordController($scope, $ionicPopup, PasswordService) {
         $scope.Password = {};
 
         $scope.CambiarPassword = function () {
-            if($scope.Password.OldPassword != null && $scope.Password.OldPassword != undefined && $scope.Password.NewPassword != null && $scope.Password.NewPassword != undefined && $scope.Password.NewPassword2 != null && $scope.Password.NewPassword2 != undefined){
-                if($scope.Password.NewPassword == $scope.Password.NewPassword2){
-                    _showAlert('Enhorabuena!', 'Datos Actualizados Exitosamente!');
-                    $scope.Password = {};
+            if($scope.Password.OldPassword != null && $scope.Password.OldPassword != undefined && $scope.Password.NewPassword != null && $scope.Password.NewPassword != undefined && $scope.Password.ConfirmPassword != null && $scope.Password.ConfirmPassword != undefined){
+                if($scope.Password.NewPassword == $scope.Password.ConfirmPassword){
+                    ChangePassword();
+                    /*_showAlert('Enhorabuena!', 'Datos Actualizados Exitosamente!');
+                    $scope.Password = {};*/
                 }
                 else{
                     _showAlert('Error', 'Las contraseñas no coinciden');
@@ -26,8 +27,20 @@
             }
         };
 
-        function CambiasPassword() {
-            /*Codigo*/
+        function ChangePassword() {
+            var promisePost = PasswordService.ChangePassword($scope.Password);
+            promisePost.then(
+                function (data) {
+                    var respuesta = data.data;
+                    if(respuesta == ""){
+                        _showAlert('Enhorabuena!', 'Datos Actualizados Exitosamente');
+                        $scope.Password = {};
+                    }
+                },
+                function (err) {
+                    console.log(JSON.stringify(err));
+                }
+            )
         }
 
         function _showAlert(titulo, contenido) {
