@@ -118,12 +118,14 @@
             for(var m=0; m < datos.length; m++){
 
                 $scope.inversiones[m] = datos[m].costos;
-                $scope.series[m] = datos[m].almacen.nombre;
 
             }
+            $scope.series = ["Facturas", "Costo", "Total"];
 
             var k = 0;
             var costo = [];
+            var factura = [];
+            var total = [];
 
             for(var i=0; i < $scope.inversiones.length; i++){
 
@@ -131,11 +133,16 @@
 
                     $scope.labels[k] = $scope.inversiones[i][j].fecha;
                     k++;
-                    costo[j] = $scope.inversiones[i][j].total;
+                    factura[j] = $scope.inversiones[i][j].facturas;
+                    costo[j] = $scope.inversiones[i][j].invercion;
+                    total[j] = $scope.inversiones[i][j].total;
+
                 }
                 $scope.costo = $scope.inversiones[i];
 
+                $scope.datos.push(factura);
                 $scope.datos.push(costo);
+                $scope.datos.push(total);
             }
         }
 
